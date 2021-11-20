@@ -23,17 +23,17 @@ img = "https://images3.alphacoders.com/235/235755.jpg"
 st.image(img)
 
 # DATA
-# @st.cache
-# def get_data():
-#     url_ep = 'http://127.0.0.1:8000/data'
-#     res = requests.get(url_ep)
-#     result = res.json()
-#     df_players = pd.DataFrame(result['players'])
-#     df_games = pd.DataFrame(result['games'])
-#     # df_moves = pd.DataFrame(result['moves'])
-#     return df_players, df_games #, df_moves
+@st.cache
+def get_data():
+    url_ep = 'http://127.0.0.1:8000/data'
+    res = requests.get(url_ep)
+    result = res.json()
+    df_players = pd.DataFrame(result['players'])
+    df_games = pd.DataFrame(result['games'])
+    # df_moves = pd.DataFrame(result['moves'])
+    return df_players, df_games #, df_moves
 
-# df_players, df_games = get_data()
+df_players, df_games = get_data()
 
 
 # # SIDEBAR
