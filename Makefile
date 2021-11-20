@@ -22,8 +22,8 @@ clean:
 	@rm -f .coverage
 	@rm -fr */__pycache__ */*.pyc __pycache__
 	@rm -fr build dist
-#	@rm -fr cc_detector-*.dist-info
-#	@rm -fr cc_detector.egg-info
+	@rm -fr cc_detector-*.dist-info
+	@rm -fr cc_detector.egg-info
 
 install:
 	@pip install . -U
@@ -37,7 +37,7 @@ count_lines:
 	@find ./scripts -name '*-*' -exec  wc -l {} \; | sort -n| awk \
 		        '{printf "%4s %s\n", $$1, $$2}{s+=$$0}END{print s}'
 	@echo ''
-#  @find ./tests -name '*.py' -exec  wc -l {} \; | sort -n| awk \
+	@find ./tests -name '*.py' -exec  wc -l {} \; | sort -n| awk \
          '{printf "%4s %s\n", $$1, $$2}{s+=$$0}END{print s}'
 	@echo ''
 
@@ -54,8 +54,8 @@ PYPI_USERNAME=<AUTHOR>
 build:
 	@python setup.py sdist bdist_wheel
 
-# pypi_test:
-# 	@twine upload -r testpypi dist/* -u $(PYPI_USERNAME)
+pypi_test:
+	@twine upload -r testpypi dist/* -u $(PYPI_USERNAME)
 
 pypi:
 	@twine upload dist/* -u $(PYPI_USERNAME)
