@@ -13,5 +13,5 @@ setup(name='cc_detector',
       test_suite='tests',
       # include_package_data: to install data from MANIFEST.in
       include_package_data=True,
-      scripts=['scripts/cc_detector-run'],
+      #scripts=['scripts/cc_detector-run'],
       zip_safe=False)
