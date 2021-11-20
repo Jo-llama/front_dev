@@ -23,20 +23,20 @@ img = "https://images3.alphacoders.com/235/235755.jpg"
 st.image(img)
 
 # DATA
-@st.cache
-def get_data():
-    url_ep = 'http://127.0.0.1:8000/data'
-    res = requests.get(url_ep)
-    result = res.json()
-    df_players = pd.DataFrame(result['players'])
-    df_games = pd.DataFrame(result['games'])
-    # df_moves = pd.DataFrame(result['moves'])
-    return df_players, df_games #, df_moves
+# @st.cache
+# def get_data():
+#     url_ep = 'http://127.0.0.1:8000/data'
+#     res = requests.get(url_ep)
+#     result = res.json()
+#     df_players = pd.DataFrame(result['players'])
+#     df_games = pd.DataFrame(result['games'])
+#     # df_moves = pd.DataFrame(result['moves'])
+#     return df_players, df_games #, df_moves
 
-df_players, df_games = get_data()
+# df_players, df_games = get_data()
 
 
-# # SIDEBAR
+# SIDEBAR
 # def sidebar():
 #     """
 #     sidebar dropdown player/games list
@@ -125,7 +125,7 @@ df_players, df_games = get_data()
 #             eval = stockfish.get_evaluation()
 #             evals.append(float(eval['value']))
         
-#         # PLOT GAME EVALS
+#         #PLOT GAME EVALS
 #         st.write('Powered by Stockfish 14')
 #         fig, ax = plt.subplots()
 #         plt.title(f"{game.headers['White']} vs {game.headers['Black']}")
@@ -138,3 +138,10 @@ df_players, df_games = get_data()
 #         st.pyplot(fig)
         
 # upload_pgn()
+
+filename = st.text_input('Enter a file path:')
+try:
+    with open(filename) as input:
+        st.text(input.read())
+except FileNotFoundError:
+    st.error('File not found.')
