@@ -5,10 +5,10 @@ install_requirements:
 	@pip install -r requirements.txt
 
 check_code:
-	@flake8 scripts/* frontend_integration/*.py
+	@flake8 scripts/* front_dev/*.py
 
 black:
-	@black scripts/* frontend_integration/*.py
+	@black scripts/* front_dev/*.py
 
 # test:
 # 	@coverage run -m pytest tests/*.py
