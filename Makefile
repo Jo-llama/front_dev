@@ -22,8 +22,8 @@ clean:
 	@rm -f .coverage
 	@rm -fr */__pycache__ */*.pyc __pycache__
 	@rm -fr build dist
-	@rm -fr cc_detector-*.dist-info
-	@rm -fr cc_detector.egg-info
+#	@rm -fr cc_detector-*.dist-info
+#	@rm -fr cc_detector.egg-info
 
 install:
 	@pip install . -U
