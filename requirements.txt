@@ -1,0 +1,43 @@
+# packaging
+pip>=9
+setuptools>=26
+twine
+wheel>=0.29
+
+# data science
+numpy
+pandas
+scikit-learn
+tensorflow-cpu==2.7.0
+
+# tests/linter
+black
+coverage
+flake8
+pytest
+yapf
+
+# API
+gcsfs
+google-cloud-storage
+mlflow
+s3fs
+fastapi
+uvicorn
+streamlit
+
+# utilities
+six>=1.14
+joblib
+memoized-property
+termcolor
+uuid
+shortuuid
+
+#chess packages
+chess
+#stockfish
+
+#viz
+matplotlib
+#seaborn
