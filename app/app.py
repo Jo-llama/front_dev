@@ -23,17 +23,17 @@ img = "https://images3.alphacoders.com/235/235755.jpg"
 st.image(img)
 
 # DATA
-@st.cache
-def get_data():
-    url_ep = 'http://127.0.0.1:8000/data'
-    res = requests.get(url_ep)
-    result = res.json()
-    df_players = pd.DataFrame(result['players'])
-    df_games = pd.DataFrame(result['games'])
-    # df_moves = pd.DataFrame(result['moves'])
-    return df_players, df_games #, df_moves
+# @st.cache
+# def get_data():
+#     url_ep = 'http://127.0.0.1:8000/data'
+#     res = requests.get(url_ep)
+#     result = res.json()
+#     df_players = pd.DataFrame(result['players'])
+#     df_games = pd.DataFrame(result['games'])
+#     # df_moves = pd.DataFrame(result['moves'])
+#     return df_players, df_games #, df_moves
 
-df_players, df_games = get_data()
+# df_players, df_games = get_data()
 
 
 # # SIDEBAR
@@ -63,38 +63,38 @@ df_players, df_games = get_data()
 # sidebar()
 
 
-def sidebar_player_search():
-    """ 
-    Local DB Player search with ranking progression graph
-    """
-    input_name = st.sidebar.text_input('Search Local DB Player Names', '')
-    if input_name:
-        white = df_games[df_games['White'] == input_name]
-        black = df_games[df_games['Black'] == input_name]
-        player = white.append(black)
-        if len(player) > 0:
-            st.sidebar.write('Mainscreen View')
-            st.write(f"### {input_name}'s games")
-            st.write(player)
+# def sidebar_player_search():
+#     """ 
+#     Local DB Player search with ranking progression graph
+#     """
+#     input_name = st.sidebar.text_input('Search Local DB Player Names', '')
+#     if input_name:
+#         white = df_games[df_games['White'] == input_name]
+#         black = df_games[df_games['Black'] == input_name]
+#         player = white.append(black)
+#         if len(player) > 0:
+#             st.sidebar.write('Mainscreen View')
+#             st.write(f"### {input_name}'s games")
+#             st.write(player)
             
-            if len(white) > 2 and len(black) > 2:
-                # PLOT
-                fig, ax = plt.subplots(figsize=(18,8))
-                # player['Date'] = pd.to_datetime(player['Date'])
-                # player.sort_values(by='Date', inplace=True)
-                plt.subplot(1,2,1)
-                plt.title('as White')
-                plt.plot(white['White_Elo'])
-                plt.grid()
-                plt.subplot(1,2,2)
-                plt.title('as Black')
-                plt.plot(black['Black_Elo'])
-                plt.grid()
-                st.pyplot(fig)
-        else:
-            st.sidebar.write(f'Player name "{input_name}" not found.')
+#             if len(white) > 2 and len(black) > 2:
+#                 # PLOT
+#                 fig, ax = plt.subplots(figsize=(18,8))
+#                 # player['Date'] = pd.to_datetime(player['Date'])
+#                 # player.sort_values(by='Date', inplace=True)
+#                 plt.subplot(1,2,1)
+#                 plt.title('as White')
+#                 plt.plot(white['White_Elo'])
+#                 plt.grid()
+#                 plt.subplot(1,2,2)
+#                 plt.title('as Black')
+#                 plt.plot(black['Black_Elo'])
+#                 plt.grid()
+#                 st.pyplot(fig)
+#         else:
+#             st.sidebar.write(f'Player name "{input_name}" not found.')
             
-sidebar_player_search()
+# sidebar_player_search()
 
 
 # st.write('## Human vs Human?')
