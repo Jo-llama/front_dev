@@ -3,7 +3,8 @@ import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 import requests
-from io import StringIO
+from io import StringIO, BytesIO
+#import chess
 import chess.pgn
 #from stockfish import Stockfish
 
@@ -97,51 +98,48 @@ st.image(img)
 # sidebar_player_search()
 
 
-# st.write('## Human vs Human?')
+st.write('## Human vs Human?')
 # UPLOAD PGN FILE
-# def upload_pgn():
-#     """
-#     PGN needs StringIO to be read so file can be read as a string. chess lybrary loses strength here, hence stockfish.
-#     """
-#     st.write('# Load Your PGN')
+def upload_pgn():
+    """
+    PGN needs StringIO to be read so file can be read as a string. chess lybrary loses strength here, hence stockfish.
+    """
+    st.write('# Load Your PGN')
 
-#     uploaded_file = st.file_uploader("Feed the engine.")
-#     if uploaded_file is not None:
-#         # To read file as bytes:
-#         bytes_data = uploaded_file.getvalue()
-#         # To convert to a string based IO:
-#         stringio = StringIO(uploaded_file.getvalue().decode("utf-8"))
-#         # CHESS.PGN
-#         game = chess.pgn.read_game(stringio)
-#         board = game.board()
-#         moves = list(game.mainline_moves())
-#         variations = game.mainline()  # variation.comment no longer exists - REGEX vs Stockfish ?
+    uploaded_file = st.file_uploader("Feed the engine.")
+    if uploaded_file is not None:
+        # To read file as bytes:
+        bytes_data = uploaded_file.getvalue()
+        # To convert to a string based IO:
+        stringio = StringIO(bytes_data.decode("utf-8"))
+        # CHESS.PGN
+        game = chess.pgn.read_game(stringio)
+        board = game.board()
+        moves = list(game.mainline_moves())
+        #variations = game.mainline()  # variation.comment no longer exists - REGEX vs Stockfish ?
         
-#         evals = []
-#         for move in moves:
-#             board.push(move)
-#             fen = board.fen()
-#             stockfish.set_fen_position(fen)
-#             eval = stockfish.get_evaluation()
-#             evals.append(float(eval['value']))
+        # evals = []
+        # for move in moves:
+        #     board.push(move)
+        #     fen = board.fen()
+        #     stockfish.set_fen_position(fen)
+        #     eval = stockfish.get_evaluation()
+        #     evals.append(float(eval['value']))
         
-#         #PLOT GAME EVALS
-#         st.write('Powered by Stockfish 14')
-#         fig, ax = plt.subplots()
-#         plt.title(f"{game.headers['White']} vs {game.headers['Black']}")
-#         plt.plot(evals)
-#         zeros = np.zeros(len(evals))
-#         plt.plot(zeros)
-#         plt.ylabel('CP Advantage')
-#         plt.xlabel('Moves')
-#         plt.grid()
-#         st.pyplot(fig)
-        
-# upload_pgn()
+        for move in moves:
+            st.write(str(move))
 
-filename = st.text_input('Enter a file path:')
-try:
-    with open(filename) as input:
-        st.text(input.read())
-except FileNotFoundError:
-    st.error('File not found.')
+
+        #PLOT GAME EVALS
+        # st.write('Powered by Stockfish 14')
+        # fig, ax = plt.subplots()
+        # plt.title(f"{game.headers['White']} vs {game.headers['Black']}")
+        # plt.plot(evals)
+        # zeros = np.zeros(len(evals))
+        # plt.plot(zeros)
+        # plt.ylabel('CP Advantage')
+        # plt.xlabel('Moves')
+        # plt.grid()
+        # st.pyplot(fig)
+        
+upload_pgn()

@@ -59,3 +59,18 @@ pypi_test:
 
 pypi:
 	@twine upload dist/* -u $(PYPI_USERNAME)
+
+# ----------------------------------
+#      GCP
+# ----------------------------------	
+
+BUCKET_NAME:cc_detector
+
+PYTHON_VERSION=3.7
+FRAMEWORK=scikit-learn
+RUNTIME_VERSION=1.15
+
+PACKAGE_NAME=cc_detector
+FILENAME=trainer
+
+#JOB_NAME=taxi_fare_training_pipeline_$(shell date +'%Y%m%d_%H%M%S')
