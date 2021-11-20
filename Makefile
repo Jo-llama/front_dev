@@ -10,9 +10,9 @@ check_code:
 black:
 	@black scripts/* front_dev/*.py
 
-# test:
-# 	@coverage run -m pytest tests/*.py
-# 	@coverage report -m --omit="${VIRTUAL_ENV}/lib/python*"
+test:
+#	@coverage run -m pytest tests/*.py
+#	@coverage report -m --omit="${VIRTUAL_ENV}/lib/python*"
 
 ftest:
 	@Write me
@@ -28,7 +28,7 @@ clean:
 install:
 	@pip install . -U
 
-all: clean install test black check_code
+all: clean install black check_code
 
 count_lines:
 	@find ./ -name '*.py' -exec  wc -l {} \; | sort -n| awk \
@@ -38,7 +38,7 @@ count_lines:
 		        '{printf "%4s %s\n", $$1, $$2}{s+=$$0}END{print s}'
 	@echo ''
 	@find ./tests -name '*.py' -exec  wc -l {} \; | sort -n| awk \
-        '{printf "%4s %s\n", $$1, $$2}{s+=$$0}END{print s}'
+         '{printf "%4s %s\n", $$1, $$2}{s+=$$0}END{print s}'
 	@echo ''
 
 # ----------------------------------
