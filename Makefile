@@ -28,7 +28,7 @@ clean:
 install:
 	@pip install . -U
 
-all: clean install test black check_code
+all: clean install black check_code
 
 count_lines:
 	@find ./ -name '*.py' -exec  wc -l {} \; | sort -n| awk \
