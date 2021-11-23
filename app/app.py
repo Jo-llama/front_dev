@@ -23,6 +23,7 @@ st.write('## Human vs Engine Detection')
 img = "https://images3.alphacoders.com/235/235755.jpg"
 st.image(img)
 
+
 # DATA
 # @st.cache
 # def get_data():
@@ -113,8 +114,10 @@ def upload_pgn():
         bytes_data = uploaded_file.getvalue()
         # To convert to a string based IO:
         stringio = StringIO(bytes_data.decode("utf-8"))
+        # print(type(stringio))
         # CHESS.PGN
         game = chess.pgn.read_game(stringio)
+        # print(type(game))
         board = game.board()
         moves = list(game.mainline_moves())
         #variations = game.mainline()  # variation.comment no longer exists - REGEX vs Stockfish ?
@@ -145,12 +148,15 @@ def upload_pgn():
         
 upload_pgn()
 
+base_uri = 'http://127.0.0.1:8000/'
+
+data = base_uri + 'data'
+predict = base_uri + 'predict'
+
 
 # if upload_pgn:
     
 #     url = ''
 
-#     params = {}
-
-#     response = requests.get(url, params = params)
+#     response = requests.get(predict)
 #     st.write(response.json())

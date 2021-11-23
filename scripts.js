@@ -1,1 +1,0 @@
-const cc_detector_api = 'https://YOUR_API_URL/predict';

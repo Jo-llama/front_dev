@@ -64,12 +64,14 @@ pypi:
 #      GCP
 # ----------------------------------	
 
+
 BUCKET_NAME:cc_detector
 
 PYTHON_VERSION=3.7
 FRAMEWORK=scikit-learn
 RUNTIME_VERSION=1.15
 
+##### Package params  - - - - - - - - - - - - - - - - - - -
 PACKAGE_NAME=cc_detector
 FILENAME=trainer
 
