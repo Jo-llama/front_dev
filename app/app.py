@@ -3,7 +3,7 @@ import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 import requests
-from io import StringIO, BytesIO
+from io import StringIO
 #import chess
 import chess.pgn
 #from stockfish import Stockfish
