@@ -24,17 +24,17 @@ img = "https://images3.alphacoders.com/235/235755.jpg"
 st.image(img)
 
 # DATA
-@st.cache
-def get_data():
-    url_ep = 'http://127.0.0.1:8000/data'
-    res = requests.get(url_ep)
-    result = res.json()
-    df_players = pd.DataFrame(result['players'])
-    df_games = pd.DataFrame(result['games'])
-    # df_moves = pd.DataFrame(result['moves'])
-    return df_players, df_games #, df_moves
+# @st.cache
+# def get_data():
+#     url_ep = 'http://127.0.0.1:8000/data'
+#     res = requests.get(url_ep)
+#     result = res.json()
+#     df_players = pd.DataFrame(result['players'])
+#     df_games = pd.DataFrame(result['games'])
+#     # df_moves = pd.DataFrame(result['moves'])
+#     return df_players, df_games #, df_moves
 
-df_players, df_games = get_data()
+# df_players, df_games = get_data()
 
 
 # SIDEBAR
@@ -98,13 +98,14 @@ df_players, df_games = get_data()
 # sidebar_player_search()
 
 
-st.write('## Human vs Human?')
+#st.write('## Human vs Human?')
+
 # UPLOAD PGN FILE
 def upload_pgn():
     """
-    PGN needs StringIO to be read so file can be read as a string. chess lybrary loses strength here, hence stockfish.
+    PGN needs StringIO to be read so file can be read as a string. chess library loses strength here, hence stockfish.
     """
-    st.write('# Load Your PGN')
+    st.write('### Load Your Game')
 
     uploaded_file = st.file_uploader("Feed the engine.")
     if uploaded_file is not None:
