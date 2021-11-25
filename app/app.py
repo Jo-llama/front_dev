@@ -4,8 +4,8 @@ import numpy as np
 import matplotlib.pyplot as plt
 import requests
 from io import StringIO
-from app.frontend_data import PreData
-#import chess
+from frontend_data import PreData
+import chess
 import chess.pgn
 #from stockfish import Stockfish
 
@@ -118,7 +118,7 @@ def upload_pgn():
         pgn = StringIO(bytes_data.decode("utf-8"))
         # print(type(stringio))
 
-        player_dict, game_dict, move_dict = PreData.import_data(pgn=pgn,import_lim=1)
+        player_dict, game_dict, move_dict = PreData().import_data(pgn=pgn,import_lim=1)
 
         # CHESS.PGN
         #game = chess.pgn.read_game(stringio)
@@ -149,14 +149,28 @@ def upload_pgn():
         # plt.ylabel('CP Advantage')
         # plt.xlabel('Moves')
         # plt.grid()
-        # st.pyplot(fig)
 
+        # fen_list = []
+        # for i in range(len(move_dict["FEN_moves"])):
+        #     fen = move_dict["FEN_moves"][i]
+        #     fen_list.append(fen)
 
-        # params = {
-        #     'moves':stringio
-        # }
+        st.write(move_dict["FEN_moves"])
+
+        params = {
+        'Game_ID': move_dict["Game_ID"],
+        "FEN_moves": move_dict["FEN_moves"],
+        "Bitmap_moves": move_dict["Bitmap_moves"],
+        "WhiteIsComp": move_dict["WhiteIsComp"],
+        "turn": move_dict["turn"],
+        "Castling_right": move_dict["Castling_right"],
+        "EP_option": move_dict["EP_option"],
+        "Pseudo_EP_option": move_dict["Pseudo_EP_option"],
+        "Halfmove_clock": move_dict["Halfmove_clock"]
+        }
+
         url_ep = 'http://127.0.0.1:8000/predict'
-        res = requests.get(url_ep, move_dict)
+        res = requests.get(url_ep, params)
         result = res.json()
         st.write(result)
 

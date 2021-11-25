@@ -1,8 +1,8 @@
 import chess
 import chess.pgn
-from app.player import set_player_dict, player_info_extractor
-from app.game import set_game_dict, game_info_extractor
-from app.move import set_move_dict, move_info_extractor,\
+from player import set_player_dict, player_info_extractor
+from game import set_game_dict, game_info_extractor
+from move import set_move_dict, move_info_extractor,\
     bitmap_representer, castling_right, en_passant_opp, halfmove_clock
 from io import StringIO
 
