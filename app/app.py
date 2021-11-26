@@ -155,7 +155,7 @@ def upload_pgn():
         #     fen = move_dict["FEN_moves"][i]
         #     fen_list.append(fen)
 
-        st.write(move_dict["FEN_moves"])
+        #st.write(move_dict["Bitmap_moves"][0])
 
         params = {
         'Game_ID': move_dict["Game_ID"],

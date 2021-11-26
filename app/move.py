@@ -32,14 +32,23 @@ def bitmap_representer(board, pieces, squares, move_dict):
         for square in squares:
             if square in positions.keys():
                 if positions[square] == piece:
-                    bitmap_board[square] = 1
+                    bitmap_board['s'+str(square)] = 1
                 else:
-                    bitmap_board[square] = 0
+                    bitmap_board['s'+str(square)] = 0
             else:
-                bitmap_board[square] = 0
+                bitmap_board['s'+str(square)] = 0
         bitmap_board_dict[str(piece)] = bitmap_board
 
-    move_dict['Bitmap_moves'].append(bitmap_board_dict)
+    df_board = pd.DataFrame(bitmap_board_dict).to_numpy()
+    array_wide = df_board.flatten('F')
+    bm_list = array_wide.tolist()
+    bm_str = ""
+    for i in bm_list:
+        bm_str+=(str(i)+"-")
+
+    move_dict['Bitmap_moves'].append(bm_str)
+
+    #move_dict['Bitmap_moves'].append(bitmap_board_dict)
     return move_dict
 
 def castling_right(game, board, move_dict, white):
