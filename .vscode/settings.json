@@ -1,0 +1,4 @@
+{
+  "python.pythonPath": "/Users/manuel/.pyenv/versions/3.8.6/envs/front_dev/bin/python",
+  "python.formatting.provider": "black"
+}
