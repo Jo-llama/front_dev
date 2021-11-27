@@ -74,7 +74,8 @@ class PreData:
 
                     # Game info parsing
                     games = game_info_extractor(game=game,
-                                                game_dict=game_dict)
+                                                game_dict=game_dict,
+                                                game_counter=game_counter)
 
                     # Moves info parsing
                     white = True
