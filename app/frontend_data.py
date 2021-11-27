@@ -66,6 +66,18 @@ class PreData:
                 game = chess.pgn.read_game(pgn)
                 board = game.board()
                 moves = list(game.mainline_moves())
+                # variations = game.mainline()
+                # game_log = {
+                #     'evals':[],
+                #     'WhiteIsComp':[]
+                #     }
+
+                # #cycle through evals
+                # for variation in variations:
+                #     eval = variation.comment
+                #     eval = eval.split('[%eval ')[1].split(']')[0]
+                #     game_log['evals'].append(float(eval))
+                #     game_log['WhiteIsComp'].append(game.headers.get('WhiteIsComp', 'No'))
 
                 if len(moves) > 5:
                     # Player info parsing
@@ -91,7 +103,8 @@ class PreData:
                         #Extract GAME ID and FEN moves
                         move_dict = move_info_extractor(game=game,
                                                         board=board,
-                                                        move_dict=move_dict)
+                                                        move_dict=move_dict,
+                                                        game_counter=game_counter)
 
                         #Generate bitmap representation of FENs
                         move_dict = bitmap_representer(board=board,

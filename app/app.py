@@ -170,6 +170,7 @@ def upload_pgn():
         }
 
         url_ep = 'http://127.0.0.1:8000/predict'
+        url_api = "https://chessapiimage-z242n5ixpq-ew.a.run.app/predict"
         res = requests.get(url_ep, params)
         result = res.json()
         st.write(result)
