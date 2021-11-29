@@ -7,6 +7,8 @@ from io import StringIO
 from frontend_data import PreData
 import chess
 import chess.pgn
+import json
+
 #from stockfish import Stockfish
 
 # stockfish init
@@ -171,8 +173,10 @@ def upload_pgn():
 
         url_ep = 'http://127.0.0.1:8000/predict'
         url_api = "https://chessapiimage-z242n5ixpq-ew.a.run.app/predict"
-        res = requests.get(url_api, params)
-        result = res.json()
+
+
+        post = requests.post(url_api,json=params)
+        result = post.json()
         st.write(result)
 
 upload_pgn()

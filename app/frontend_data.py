@@ -82,9 +82,11 @@ class PreData:
                     #cycle through evals
                     for variation in variations:
                         eval = variation.comment
-                        eval = eval.split('[%eval ')[1].split(']')[0]
-                        eval_log['evals'].append(float(eval))
-                    move_dict["Evaluation"].append(eval_log["evals"])
+                        if "%eval" in eval:
+                            eval = eval.split('[%eval ')[1].split(']')[0]
+                            eval_log['evals'].append(float(eval))
+                    if "%eval" in eval:
+                        move_dict["Evaluation"].append(eval_log["evals"])
 
                     # Moves info parsing
                     white = True
