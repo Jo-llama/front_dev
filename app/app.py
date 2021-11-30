@@ -11,6 +11,10 @@ import json
 
 #from stockfish import Stockfish
 
+st.set_page_config(page_title='Chess Cheating Detector', page_icon="🤖")
+st.title('♟️ Human vs Engine Detection')
+
+
 # stockfish init
 # stockfish = Stockfish(
 #     '/home/vini/Personal/test_project/stockfish_14_linux_x64/stockfish_14_linux_x64/stockfish_14_x64',
@@ -104,6 +108,30 @@ st.image(img)
 
 #st.write('## Human vs Human?')
 
+def dropdown():
+    """
+    sidebar dropdown white/black player list
+    """
+    # title
+    st.sidebar.title('Check player')
+    # dropdown
+    add_selectbox = st.sidebar.selectbox(
+        "Choose player",
+        ("White", "Black")
+    )
+    if add_selectbox == 'White':
+        st.sidebar.write('White player')
+        player = "White"
+
+    if add_selectbox == 'Black':
+        st.sidebar.write('Black player')
+        player = "Black"
+    
+    return player
+
+
+
+
 # UPLOAD PGN FILE
 def upload_pgn():
     """
@@ -120,14 +148,18 @@ def upload_pgn():
         pgn = StringIO(bytes_data.decode("utf-8"))
         # print(type(stringio))
 
+        player = dropdown()
+
         player_dict, game_dict, move_dict = PreData().import_data(pgn=pgn,import_lim=1)
 
+        
+
         # CHESS.PGN
-        #game = chess.pgn.read_game(stringio)
+        # game = chess.pgn.read_game(pgn)
         # print(type(game))
-        #board = game.board()
-        #moves = list(game.mainline_moves())
-        #variations = game.mainline()  # variation.comment no longer exists - REGEX vs Stockfish ?
+        # board = game.board()
+        # moves = list(game.mainline_moves())
+        # variations = game.mainline()  # variation.comment no longer exists - REGEX vs Stockfish ?
 
         # evals = []
         # for move in moves:
@@ -169,11 +201,12 @@ def upload_pgn():
         "EP_option": move_dict["EP_option"],
         "Pseudo_EP_option": move_dict["Pseudo_EP_option"],
         "Halfmove_clock": move_dict["Halfmove_clock"],
-        "Evaluation": move_dict["Evaluation"]
+        "Evaluation": move_dict["Evaluation"],
+        "Player_color": player
         }
 
         url_ep = 'http://127.0.0.1:8000/predict'
-        url_api = "https://chessapiimage-z242n5ixpq-ew.a.run.app/predict"
+        url_api = "https://cc-detector-z242n5ixpq-ew.a.run.app/predict"
 
         post = requests.post(url_ep,json=params)
         result = post.json()
@@ -182,7 +215,12 @@ def upload_pgn():
 
 upload_pgn()
 
-# base_uri = 'http://127.0.0.1:8000/'
+import random
 
-# data = base_uri + 'data'
-# predict = base_uri + 'predict'
+def warning():
+    r = random.uniform(0.1, 1.0)
+    if r > 0.5:
+        st.error('Comp')
+    else:
+        st.success('human')
+warning()
