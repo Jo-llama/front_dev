@@ -85,8 +85,12 @@ class PreData:
                         if "%eval" in eval:
                             eval = eval.split('[%eval ')[1].split(']')[0]
                             eval_log['evals'].append(float(eval))
-                    if "%eval" in eval:
+                        else:
+                            eval_log['evals'] = "NA"
+                    if eval_log['evals'] != "NA":
                         move_dict["Evaluation"].append(eval_log["evals"])
+                    else:
+                        move_dict["Evaluation"] = "NA"
 
                     # Moves info parsing
                     white = True
@@ -134,7 +138,8 @@ class PreData:
                 print('No further games to load.')
                 break
 
-        move_dict["Evaluation"] = self.flatten_list(move_dict["Evaluation"])
+        if move_dict["Evaluation"] != "NA":
+            move_dict["Evaluation"] = self.flatten_list(move_dict["Evaluation"])
 
         print(f'{game_counter} games read.')
         print(
