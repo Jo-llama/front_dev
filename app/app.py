@@ -172,7 +172,7 @@ def upload_pgn():
         "Evaluation": move_dict["Evaluation"]
         }
 
-        url_ep = 'http://127.0.0.1:8000/predicts'
+        url_ep = 'http://127.0.0.1:8000/predict'
         url_api = "https://chessapiimage-z242n5ixpq-ew.a.run.app/predict"
 
         post = requests.post(url_api,json=params)
