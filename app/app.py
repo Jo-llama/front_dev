@@ -173,9 +173,9 @@ def upload_pgn():
         }
 
         url_ep = 'http://127.0.0.1:8000/predict'
-        url_api = "https://chessapiimage-z242n5ixpq-ew.a.run.app/predict"
+        url_api = "https://cc-detector-z242n5ixpq-ew.a.run.app"
 
-        post = requests.post(url_ep,json=params)
+        post = requests.post(url_api,json=params)
         result = post.json()
         st.write(result)
 
