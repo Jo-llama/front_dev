@@ -141,8 +141,6 @@ class PreData:
 
         move_dict["Evaluation"] = self.flatten_list(move_dict["Evaluation"])
 
-        print(move_dict)
-
         print(f'{game_counter} games read.')
         print(
             f'{games_parsed} games with a total number of {move_counter} moves parsed.'
