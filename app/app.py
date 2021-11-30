@@ -11,6 +11,10 @@ import json
 
 #from stockfish import Stockfish
 
+st.set_page_config(page_title='Chess Cheating Detector', page_icon="🤖")
+st.title('♟️ Human vs Engine Detection')
+
+
 # stockfish init
 # stockfish = Stockfish(
 #     '/home/vini/Personal/test_project/stockfish_14_linux_x64/stockfish_14_linux_x64/stockfish_14_x64',
@@ -104,6 +108,26 @@ st.image(img)
 
 #st.write('## Human vs Human?')
 
+def dropdown():
+    """
+    sidebar dropdown white/black player list
+    """
+    # title
+    st.sidebar.title('Check player')
+    # dropdown
+    add_selectbox = st.sidebar.selectbox(
+        "Choose player",
+        ("White", "Black")
+    )
+    if add_selectbox == 'White':
+        st.sidebar.write('White player')
+
+    if add_selectbox == 'Black':
+        st.sidebar.write('Black player')
+
+dropdown()
+
+
 # UPLOAD PGN FILE
 def upload_pgn():
     """
@@ -173,7 +197,7 @@ def upload_pgn():
         }
 
         url_ep = 'http://127.0.0.1:8000/predict'
-        url_api = "https://chessapiimage-z242n5ixpq-ew.a.run.app/predict"
+        url_api = "https://cc-detector-z242n5ixpq-ew.a.run.app/predict"
 
         post = requests.post(url_api,json=params)
         result = post.json()
@@ -182,7 +206,12 @@ def upload_pgn():
 
 upload_pgn()
 
-# base_uri = 'http://127.0.0.1:8000/'
+import random
 
-# data = base_uri + 'data'
-# predict = base_uri + 'predict'
+def warning():
+    r = random.uniform(0.1, 1.0)
+    if r > 0.5:
+        st.info('Comp')
+    else:
+        st.success('human')
+warning()
