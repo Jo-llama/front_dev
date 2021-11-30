@@ -69,6 +69,10 @@ class PreData:
                 variations = game.mainline()
                 eval_log = {'evals': []}
 
+                if "Annotator" in game.headers:
+                    if game.headers["Annotator"] == "lichess.org":
+                        eval_source = "lichess"
+
                 if len(moves) > 5:
                     # Player info parsing
                     players = player_info_extractor(game=game,
@@ -129,6 +133,7 @@ class PreData:
                         #Extract Halfmove clock
                         move_dict = halfmove_clock(board=board,
                                                 move_dict=move_dict)
+
                         move_counter += 1
                     games_parsed += 1
 
@@ -141,7 +146,10 @@ class PreData:
 
         move_dict["Evaluation"] = self.flatten_list(move_dict["Evaluation"])
 
-        print(move_dict)
+        if eval_source == "lichess":
+            move_dict["Evaluation"] = [i * 100 if i != "NA" else "NA" for i in move_dict["Evaluation"]]
+
+        print(move_dict["Evaluation"])
 
         print(f'{game_counter} games read.')
         print(
