@@ -126,7 +126,7 @@ def dropdown():
     if add_selectbox == 'Black':
         st.sidebar.write('Black player')
         player = "Black"
-    
+
     return player
 
 
@@ -152,7 +152,7 @@ def upload_pgn():
 
         player_dict, game_dict, move_dict = PreData().import_data(pgn=pgn,import_lim=1)
 
-        
+
 
         # CHESS.PGN
         # game = chess.pgn.read_game(pgn)
