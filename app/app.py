@@ -168,7 +168,8 @@ def upload_pgn():
         "Castling_right": move_dict["Castling_right"],
         "EP_option": move_dict["EP_option"],
         "Pseudo_EP_option": move_dict["Pseudo_EP_option"],
-        "Halfmove_clock": move_dict["Halfmove_clock"]
+        "Halfmove_clock": move_dict["Halfmove_clock"],
+        "Evaluation": move_dict["Evaluation"]
         }
 
         url_ep = 'http://127.0.0.1:8000/predicts'
