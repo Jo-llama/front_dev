@@ -148,8 +148,8 @@ class PreData:
 
         move_dict["Evaluation"] = self.flatten_list(move_dict["Evaluation"])
 
-        if eval_source == "lichess":
-            move_dict["Evaluation"] = [i * 100 if i != "NA" else "NA" for i in move_dict["Evaluation"]]
+        #if eval_source == "lichess":
+        #    move_dict["Evaluation"] = [i * 100 if i != "NA" else "NA" for i in move_dict["Evaluation"]]
 
         print(move_dict["Evaluation"])
 
