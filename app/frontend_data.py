@@ -66,18 +66,8 @@ class PreData:
                 game = chess.pgn.read_game(pgn)
                 board = game.board()
                 moves = list(game.mainline_moves())
-                # variations = game.mainline()
-                # game_log = {
-                #     'evals':[],
-                #     'WhiteIsComp':[]
-                #     }
-
-                # #cycle through evals
-                # for variation in variations:
-                #     eval = variation.comment
-                #     eval = eval.split('[%eval ')[1].split(']')[0]
-                #     game_log['evals'].append(float(eval))
-                #     game_log['WhiteIsComp'].append(game.headers.get('WhiteIsComp', 'No'))
+                variations = game.mainline()
+                eval_log = {'evals': []}
 
                 if len(moves) > 5:
                     # Player info parsing
@@ -88,6 +78,19 @@ class PreData:
                     games = game_info_extractor(game=game,
                                                 game_dict=game_dict,
                                                 game_counter=game_counter)
+
+                    #cycle through evals
+                    for variation in variations:
+                        eval = variation.comment
+                        if "%eval" in eval:
+                            eval = eval.split('[%eval ')[1].split(']')[0]
+                            eval_log['evals'].append(float(eval))
+                        else:
+                            eval_log['evals'] = "NA"
+                    if eval_log['evals'] != "NA":
+                        move_dict["Evaluation"].append(eval_log["evals"])
+                    else:
+                        move_dict["Evaluation"] = "NA"
 
                     # Moves info parsing
                     white = True
@@ -135,8 +138,23 @@ class PreData:
                 print('No further games to load.')
                 break
 
+        if move_dict["Evaluation"] != "NA":
+            move_dict["Evaluation"] = self.flatten_list(move_dict["Evaluation"])
+
         print(f'{game_counter} games read.')
         print(
             f'{games_parsed} games with a total number of {move_counter} moves parsed.'
         )
         return players, games, move_dict
+
+    def flatten_list(self, _2d_list):
+        flat_list = []
+        # Iterate through the outer list
+        for element in _2d_list:
+            if type(element) is list:
+                # If the element is of type list, iterate through the sublist
+                for item in element:
+                    flat_list.append(item)
+            else:
+                flat_list.append(element)
+        return flat_list
