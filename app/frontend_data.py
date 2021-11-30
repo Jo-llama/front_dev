@@ -84,13 +84,14 @@ class PreData:
                         eval = variation.comment
                         if "%eval" in eval:
                             eval = eval.split('[%eval ')[1].split(']')[0]
-                            eval_log['evals'].append(float(eval))
+                            try:
+                                eval_log['evals'].append(float(eval))
+                            except ValueError:
+                                eval_log['evals'].append("NA")
                         else:
-                            eval_log['evals'] = "NA"
-                    if eval_log['evals'] != "NA":
-                        move_dict["Evaluation"].append(eval_log["evals"])
-                    else:
-                        move_dict["Evaluation"] = "NA"
+                            eval_log['evals'].append("NA")
+
+                    move_dict["Evaluation"].append(eval_log["evals"])
 
                     # Moves info parsing
                     white = True
@@ -138,8 +139,9 @@ class PreData:
                 print('No further games to load.')
                 break
 
-        if move_dict["Evaluation"] != "NA":
-            move_dict["Evaluation"] = self.flatten_list(move_dict["Evaluation"])
+        move_dict["Evaluation"] = self.flatten_list(move_dict["Evaluation"])
+
+        print(move_dict)
 
         print(f'{game_counter} games read.')
         print(
