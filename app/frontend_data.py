@@ -72,6 +72,8 @@ class PreData:
                 if "Annotator" in game.headers:
                     if game.headers["Annotator"] == "lichess.org":
                         eval_source = "lichess"
+                    else:
+                        eval_source = "other"
 
                 if len(moves) > 5:
                     # Player info parsing
