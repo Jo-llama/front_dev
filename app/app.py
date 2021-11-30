@@ -171,25 +171,17 @@ def upload_pgn():
         "Halfmove_clock": move_dict["Halfmove_clock"]
         }
 
-        url_ep = 'http://127.0.0.1:8000/predict'
+        url_ep = 'http://127.0.0.1:8000/predicts'
         url_api = "https://chessapiimage-z242n5ixpq-ew.a.run.app/predict"
-
 
         post = requests.post(url_api,json=params)
         result = post.json()
         st.write(result)
 
+
 upload_pgn()
 
-base_uri = 'http://127.0.0.1:8000/'
+# base_uri = 'http://127.0.0.1:8000/'
 
-data = base_uri + 'data'
-predict = base_uri + 'predict'
-
-
-# if upload_pgn:
-
-#     url = ''
-
-#     response = requests.get(predict)
-#     st.write(response.json())
+# data = base_uri + 'data'
+# predict = base_uri + 'predict'
