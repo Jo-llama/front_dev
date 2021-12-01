@@ -9,8 +9,8 @@ import json
 import time
 from stockfish import Stockfish
 
-st.set_page_config(page_title='Chess Cheating Detector', page_icon="🔎")
-st.title('♟️ Chess Cheating Detector')
+st.set_page_config(page_title='Chess Engine Detective', page_icon="🕵️‍♀️")
+st.title('🔎 Chess Engine Detective')
 
 # stockfish init
 # stockfish = Stockfish(
@@ -230,6 +230,5 @@ def upload_pgn():
             st.error(f'⚠️The player might have used a support of the engine 🤖')
         else:
             st.success('✅Player is a human 💃')
-        print(type(pred))
 
 upload_pgn()
