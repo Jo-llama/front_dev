@@ -2,7 +2,6 @@ import chess
 import pandas as pd
 import numpy as np
 
-
 #functions for the data import and parsing
 def set_move_dict():
     move_dict = {
