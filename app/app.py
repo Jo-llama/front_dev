@@ -161,9 +161,7 @@ def upload_pgn():
 
         player_dict, game_dict, move_dict = PreData().import_data(pgn=pgn,import_lim=1)
 
-        eval_list = get_evals(move_dict)
-
-        print(eval_list)
+        # eval_list = get_evals(move_dict)
 
         # CHESS.PGN
         # game = chess.pgn.read_game(pgn)
@@ -212,7 +210,7 @@ def upload_pgn():
         "EP_option": move_dict["EP_option"],
         "Pseudo_EP_option": move_dict["Pseudo_EP_option"],
         "Halfmove_clock": move_dict["Halfmove_clock"],
-        "Evaluation": eval_list, #move_dict["Evaluation"],
+        "Evaluation": move_dict["Evaluation"], #eval_list,
         "Player_color": player
         }
 
