@@ -151,8 +151,6 @@ class PreData:
         #if eval_source == "lichess":
         #    move_dict["Evaluation"] = [i * 100 if i != "NA" else "NA" for i in move_dict["Evaluation"]]
 
-        print(move_dict["Evaluation"])
-
         print(f'{game_counter} games read.')
         print(
             f'{games_parsed} games with a total number of {move_counter} moves parsed.'
