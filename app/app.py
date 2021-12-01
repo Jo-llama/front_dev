@@ -9,8 +9,8 @@ import json
 import time
 from stockfish import Stockfish
 
-st.set_page_config(page_title='Chess Cheating Detector', page_icon="🔎")
-st.title('♟️ Chess Cheating Detector')
+st.set_page_config(page_title='Chess Cheating Detector', page_icon="🕵️‍♀️")
+st.title('🔎 Chess Cheating Detective')
 
 # stockfish init
 # stockfish = Stockfish(
