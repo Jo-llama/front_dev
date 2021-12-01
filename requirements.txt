@@ -23,7 +23,6 @@ streamlit
 
 # utilities
 six>=1.14
-time
 
 #chess packages
 chess
