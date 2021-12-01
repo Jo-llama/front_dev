@@ -1,20 +1,16 @@
 import streamlit as st
-import pandas as pd
-import numpy as np
-import matplotlib.pyplot as plt
+# import pandas as pd
+# import numpy as np
+# import matplotlib.pyplot as plt
 import requests
 from io import StringIO
 from frontend_data import PreData
-import chess
-import chess.pgn
 import json
 import time
-
-#from stockfish import Stockfish
+from stockfish import Stockfish
 
 st.set_page_config(page_title='Chess Cheating Detector', page_icon="🔎")
 st.title('♟️ Chess Cheating Detector')
-
 
 # stockfish init
 # stockfish = Stockfish(
@@ -130,8 +126,22 @@ def dropdown():
 
     return player
 
+def get_evals(move_dict):
+    stockfish = Stockfish(parameters={"Threads": 2,
+                                      'Min Split Depth': 26,
+                                      'Ponder':True})
+    stockfish.set_elo_rating(2600)
+    stockfish.set_skill_level(30)
 
+    eval_list = []
+    for i in move_dict["FEN_moves"]:
+        stockfish.set_fen_position(i)
+        try:
+            eval_list.append(stockfish.get_evaluation()["value"])
+        except ValueError:
+            eval_list.append("NA")
 
+    return eval_list
 
 # UPLOAD PGN FILE
 def upload_pgn():
@@ -156,7 +166,7 @@ def upload_pgn():
             time.sleep(6)
         player_dict, game_dict, move_dict = PreData().import_data(pgn=pgn,import_lim=1)
 
-
+        # eval_list = get_evals(move_dict)
 
         # CHESS.PGN
         # game = chess.pgn.read_game(pgn)
@@ -205,7 +215,7 @@ def upload_pgn():
         "EP_option": move_dict["EP_option"],
         "Pseudo_EP_option": move_dict["Pseudo_EP_option"],
         "Halfmove_clock": move_dict["Halfmove_clock"],
-        "Evaluation": move_dict["Evaluation"],
+        "Evaluation": move_dict["Evaluation"], #eval_list,
         "Player_color": player
         }
 
