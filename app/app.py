@@ -208,7 +208,7 @@ def upload_pgn():
         params = {
         'Game_ID': move_dict["Game_ID"],
         "FEN_moves": move_dict["FEN_moves"],
-        #"Bitmap_moves": move_dict["Bitmap_moves"],
+        "Bitmap_moves": move_dict["Bitmap_moves"],
         "WhiteIsComp": move_dict["WhiteIsComp"],
         "turn": move_dict["turn"],
         "Castling_right": move_dict["Castling_right"],

@@ -116,10 +116,10 @@ class PreData:
                                                         game_counter=game_counter)
 
                         #Generate bitmap representation of FENs
-                        # move_dict = bitmap_representer(board=board,
-                        #                             pieces=self.PIECES,
-                        #                             squares=self.SQUARES,
-                        #                             move_dict=move_dict)
+                        move_dict = bitmap_representer(board=board,
+                                                    pieces=self.PIECES,
+                                                    squares=self.SQUARES,
+                                                    move_dict=move_dict)
 
                         #Extract turn color and castling availablity
                         move_dict, white = castling_right(game=game,
