@@ -225,8 +225,8 @@ def upload_pgn():
         post = requests.post(url_api,json=params)
         result = post.json()
         pred = json.loads(result['prediction'])
-        
-        if pred > 0.5:
+
+        if pred > 0.13115102:
             st.error(f'⚠️The player might have used a support of the engine 🤖')
         else:
             st.success('✅Player is a human 💃')
