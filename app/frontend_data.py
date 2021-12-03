@@ -65,14 +65,14 @@ class PreData:
                 game = chess.pgn.read_game(pgn)
                 board = game.board()
                 moves = list(game.mainline_moves())
-                variations = game.mainline()
-                eval_log = {'evals': []}
+                # variations = game.mainline()
+                # eval_log = {'evals': []}
 
-                if "Annotator" in game.headers:
-                    if game.headers["Annotator"] == "lichess.org":
-                        eval_source = "lichess"
-                    else:
-                        eval_source = "other"
+                # if "Annotator" in game.headers:
+                #     if game.headers["Annotator"] == "lichess.org":
+                #         eval_source = "lichess"
+                #     else:
+                #         eval_source = "other"
 
                 if len(moves) > 5:
                     # Player info parsing
@@ -84,19 +84,19 @@ class PreData:
                                                 game_dict=game_dict,
                                                 game_counter=game_counter)
 
-                    #cycle through evals
-                    for variation in variations:
-                        eval = variation.comment
-                        if "%eval" in eval:
-                            eval = eval.split('[%eval ')[1].split(']')[0]
-                            try:
-                                eval_log['evals'].append(float(eval))
-                            except ValueError:
-                                eval_log['evals'].append("NA")
-                        else:
-                            eval_log['evals'].append("NA")
+                    # #cycle through evals
+                    # for variation in variations:
+                    #     eval = variation.comment
+                    #     if "%eval" in eval:
+                    #         eval = eval.split('[%eval ')[1].split(']')[0]
+                    #         try:
+                    #             eval_log['evals'].append(float(eval))
+                    #         except ValueError:
+                    #             eval_log['evals'].append("NA")
+                    #     else:
+                    #         eval_log['evals'].append("NA")
 
-                    move_dict["Evaluation"].append(eval_log["evals"])
+                    # move_dict["Evaluation"].append(eval_log["evals"])
 
                     # Moves info parsing
                     white = True
@@ -116,10 +116,10 @@ class PreData:
                                                         game_counter=game_counter)
 
                         #Generate bitmap representation of FENs
-                        move_dict = bitmap_representer(board=board,
-                                                    pieces=self.PIECES,
-                                                    squares=self.SQUARES,
-                                                    move_dict=move_dict)
+                        # move_dict = bitmap_representer(board=board,
+                        #                             pieces=self.PIECES,
+                        #                             squares=self.SQUARES,
+                        #                             move_dict=move_dict)
 
                         #Extract turn color and castling availablity
                         move_dict, white = castling_right(game=game,
@@ -145,7 +145,7 @@ class PreData:
                 print('No further games to load.')
                 break
 
-        move_dict["Evaluation"] = self.flatten_list(move_dict["Evaluation"])
+        #move_dict["Evaluation"] = self.flatten_list(move_dict["Evaluation"])
 
         #if eval_source == "lichess":
         #    move_dict["Evaluation"] = [i * 100 if i != "NA" else "NA" for i in move_dict["Evaluation"]]
