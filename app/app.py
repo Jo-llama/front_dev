@@ -5,10 +5,12 @@ import streamlit as st
 import requests
 from io import StringIO
 from frontend_data import PreData
+import json
+import time
 from stockfish import Stockfish
 
-st.set_page_config(page_title='Chess Cheating Detector', page_icon="🤖")
-st.title('♟️ Human vs Engine Detection')
+st.set_page_config(page_title='Chess Cheating Detector', page_icon="🔎")
+st.title('♟️ Chess Cheating Detector')
 
 # stockfish init
 # stockfish = Stockfish(
@@ -21,7 +23,7 @@ st.title('♟️ Human vs Engine Detection')
 
 # HEADER
 # st.write('# CHESS FILES')
-st.write('## Human vs Engine Detection')
+#st.write('## Human vs Engine Detection')
 img = "https://images3.alphacoders.com/235/235755.jpg"
 st.image(img)
 
@@ -108,18 +110,18 @@ def dropdown():
     sidebar dropdown white/black player list
     """
     # title
-    st.sidebar.title('Check player')
+    st.sidebar.title('Select Player')
     # dropdown
     add_selectbox = st.sidebar.selectbox(
-        "Choose player",
+        "Which player do you want to verify?",
         ("White", "Black")
     )
     if add_selectbox == 'White':
-        st.sidebar.write('White player')
+        #st.sidebar.write('White player')
         player = "White"
 
     if add_selectbox == 'Black':
-        st.sidebar.write('Black player')
+        #st.sidebar.write('Black player')
         player = "Black"
 
     return player
@@ -148,7 +150,7 @@ def upload_pgn():
     """
     st.write('### Load Your Game')
 
-    uploaded_file = st.file_uploader("Feed the engine.")
+    uploaded_file = st.file_uploader("Feed the engine with PGN file")
 
     if uploaded_file is not None:
         # To read file as bytes:
@@ -158,7 +160,10 @@ def upload_pgn():
         # print(type(stringio))
 
         player = dropdown()
-
+        with st.spinner(text="Chasing this bot 🔎"):
+            time.sleep(6)
+        with st.spinner(text="Almost done 👀"):
+            time.sleep(6)
         player_dict, game_dict, move_dict = PreData().import_data(pgn=pgn,import_lim=1)
 
         # eval_list = get_evals(move_dict)
@@ -219,17 +224,12 @@ def upload_pgn():
 
         post = requests.post(url_api,json=params)
         result = post.json()
-        st.write(result)
-
+        pred = json.loads(result['prediction'])
+        
+        if pred > 0.5:
+            st.error(f'⚠️The player might have used a support of the engine 🤖')
+        else:
+            st.success('✅Player is a human 💃')
+        print(type(pred))
 
 upload_pgn()
-
-import random
-
-def warning():
-    r = random.uniform(0.1, 1.0)
-    if r > 0.5:
-        st.error('Comp')
-    else:
-        st.success('human')
-warning()
