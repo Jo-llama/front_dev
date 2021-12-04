@@ -161,9 +161,8 @@ def upload_pgn():
 
         player = dropdown()
         with st.spinner(text="Chasing this bot 🔎"):
-            time.sleep(6)
-        with st.spinner(text="Almost done 👀"):
-            time.sleep(6)
+            time.sleep(3)
+
         player_dict, game_dict, move_dict = PreData().import_data(pgn=pgn,import_lim=1)
 
         # eval_list = get_evals(move_dict)
@@ -223,12 +222,16 @@ def upload_pgn():
         url_api = "https://cc-detector-z242n5ixpq-ew.a.run.app/predict"
 
         post = requests.post(url_api,json=params)
+
+        with st.spinner(text="Almost done 👀"):
+            time.sleep(3)
+
         result = post.json()
         pred = json.loads(result['prediction'])
 
-        if pred > 0.7:
-            st.error(f'⚠️The player might have used the support of a chess engine 🤖')
+        if pred > 0.5:
+            st.error(f'⚠️ The player might have used the support of a chess engine 🤖')
         else:
-            st.success('✅Player is probably a human 💃')
+            st.success('✅ The player is probably a human 💃')
 
 upload_pgn()
