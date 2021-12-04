@@ -226,10 +226,10 @@ def upload_pgn():
         result = post.json()
         pred = json.loads(result['prediction'])
 
-        if pred > 0.13115102:
-            st.error(f'⚠️The player might have used a support of the engine 🤖')
+        if pred > 0.7:
+            st.error(f'⚠️The player might have used the support of a chess engine 🤖')
         else:
-            st.success('✅Player is a human 💃')
+            st.success('✅Player is probably a human 💃')
         print(type(pred))
 
 upload_pgn()
